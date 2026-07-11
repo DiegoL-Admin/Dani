@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Para Daniela ♥</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0a1636;
+    --twilight:#3a2a63;
+    --mauve:#7a3f77;
+    --rose:#c85b76;
+    --coral:#e8804f;
+    --ember:#e23b4e;
+    --candle:#ffce8a;
+    --cream:#fdf3ee;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    background:#0a1636;
+    color:var(--cream);
+    overflow:hidden;
+    position:relative;
+  }
+
+  /* ---------- Cielo / atardecer ---------- */
+  .sky{
+    position:fixed;inset:0;z-index:0;
+    background:
+      radial-gradient(140% 90% at 50% 118%, rgba(255,180,120,.55) 0%, rgba(226,90,80,.35) 22%, rgba(160,60,110,0) 48%),
+      linear-gradient(to bottom,
+        #06102b 0%,
+        #142146 16%,
+        #3a2a63 36%,
+        #6b3671 54%,
+        #b04d6c 70%,
+        #e0684f 84%,
+        #f39a5b 100%);
+  }
+  .stars{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+  .star{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.8;
+    animation:twinkle var(--tw,3s) ease-in-out infinite alternate;}
+  @keyframes twinkle{from{opacity:.15;}to{opacity:.9;}}
+
+  /* ---------- Constelación de Capricornio ---------- */
+  .constellation{position:fixed;z-index:1;top:2.5vh;left:50%;transform:translateX(-50%);
+    width:min(430px,80vw);pointer-events:none;opacity:.9;
+    filter:drop-shadow(0 0 7px rgba(255,220,180,.28));}
+  .cline{fill:none;stroke:rgba(255,238,214,.32);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:900;stroke-dashoffset:900;animation:drawc 3.5s ease forwards .6s;}
+  @keyframes drawc{to{stroke-dashoffset:0;}}
+  .cstar{fill:#fff;transform-box:fill-box;transform-origin:center;
+    animation:ctw var(--ct,3.5s) ease-in-out infinite alternate;}
+  .cstar.bright{fill:#fff6e2;}
+  @keyframes ctw{from{opacity:.45;}to{opacity:1;}}
+  .cglow{fill:#ffe6be;opacity:.16;animation:ctw var(--ct,4s) ease-in-out infinite alternate;}
+  .clabel{fill:rgba(255,240,220,.5);font-family:'Cormorant Garamond',serif;
+    font-size:13px;letter-spacing:.34em;text-transform:uppercase;}
+
+  /* ---------- Final: el cielo sube y se ilumina ---------- */
+  .aura{position:fixed;inset:0;z-index:5;pointer-events:none;opacity:0;
+    background:radial-gradient(120% 85% at 50% 32%,rgba(255,244,214,.5),rgba(255,214,170,.14) 45%,rgba(255,214,170,0) 72%);
+    transition:opacity 3.6s ease;}
+  .aura.on{opacity:1;}
+  .letter.dismiss{animation:letterOut 1.1s ease forwards;pointer-events:none;}
+  @keyframes letterOut{to{opacity:0;transform:translateY(-48px);filter:blur(5px);}}
+  .stars.lift{animation:skyLift 4.4s cubic-bezier(.35,0,.15,1) forwards;}
+  @keyframes skyLift{to{transform:translateY(-30vh) scale(1.18);}}
+  .star.shine{animation:starShine 2.8s ease forwards!important;}
+  @keyframes starShine{to{opacity:1;box-shadow:0 0 9px 2px rgba(255,240,210,.9);}}
+  .constellation.lift{animation:conLift 4.4s cubic-bezier(.35,0,.15,1) forwards;}
+  @keyframes conLift{
+    from{transform:translateX(-50%) translateY(0) scale(1);}
+    to{transform:translateX(-50%) translateY(14vh) scale(1.14);}
+  }
+  .constellation.lift .cline{stroke:rgba(255,246,226,.8);transition:stroke 2.5s ease;}
+  .constellation.lift .cstar{fill:#fff;opacity:1;animation:none;
+    filter:drop-shadow(0 0 6px rgba(255,240,210,.95));}
+  .constellation.lift .cglow{opacity:.42;animation:none;}
+  .spark{position:fixed;z-index:6;width:3px;height:3px;border-radius:50%;background:#fff;
+    box-shadow:0 0 9px 2px rgba(255,240,200,.9);pointer-events:none;
+    animation:sparkUp var(--sd,4s) ease-out forwards;}
+  @keyframes sparkUp{0%{transform:translateY(0) scale(.5);opacity:0;}15%{opacity:1;}
+    100%{transform:translateY(-96vh) scale(1.25);opacity:0;}}
+
+  /* Mensaje final dedicado a Capricornio */
+  .finalmsg{position:fixed;z-index:12;left:50%;top:55%;transform:translate(-50%,0);
+    width:min(560px,88vw);text-align:center;pointer-events:none;opacity:0;}
+  .finalmsg.on{opacity:1;}
+  .finalmsg p{font-size:clamp(1.18rem,4.7vw,1.6rem);line-height:1.55;color:var(--cream);
+    text-shadow:0 2px 16px rgba(0,0,0,.6),0 0 28px rgba(255,180,140,.28);}
+  .finalmsg span{display:block;opacity:0;transform:translateY(12px);}
+  .finalmsg.on span{animation:fmLine 1s ease forwards;}
+  @keyframes fmLine{to{opacity:1;transform:translateY(0);}}
+  .finalmsg.on span:nth-child(1){animation-delay:1.6s;}
+  .finalmsg.on span:nth-child(2){animation-delay:2.1s;}
+  .finalmsg.on span:nth-child(3){animation-delay:2.6s;}
+  .finalmsg.on span:nth-child(4){animation-delay:3.1s;}
+  .finalmsg.on span:nth-child(5){animation-delay:3.6s;}
+  .finalmsg.on span:nth-child(6){animation-delay:4.1s;}
+  .finalmsg .sep{display:block;height:.55em;}
+
+  /* ---------- Ciudad ---------- */
+  .city{position:fixed;left:0;right:0;bottom:0;height:26vh;z-index:2;pointer-events:none;
+    background:linear-gradient(to top,#050a1c 25%,rgba(5,10,28,.65) 60%,rgba(5,10,28,0) 100%);}
+  .citylights{position:fixed;left:0;right:0;bottom:6vh;height:16vh;z-index:2;pointer-events:none;overflow:hidden;}
+  .win{position:absolute;bottom:0;width:2px;height:2px;border-radius:50%;
+    background:var(--candle);box-shadow:0 0 6px 1px rgba(255,206,138,.8);
+    animation:flick var(--wf,4s) ease-in-out infinite alternate;}
+  @keyframes flick{from{opacity:.35;}to{opacity:1;}}
+
+  /* ---------- Luces de hada ---------- */
+  .fairy{position:fixed;top:0;right:5%;z-index:3;pointer-events:none;}
+  .bulb{position:absolute;width:6px;height:6px;border-radius:50%;
+    background:radial-gradient(circle,#fff6df 0%,var(--candle) 55%,rgba(255,200,120,0) 100%);
+    box-shadow:0 0 10px 3px rgba(255,206,138,.7);
+    animation:glow var(--bf,2.4s) ease-in-out infinite alternate;}
+  @keyframes glow{from{opacity:.35;transform:scale(.8);}to{opacity:1;transform:scale(1.15);}}
+
+  /* ---------- Partículas ---------- */
+  .particles{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden;}
+  .heart,.petal{position:absolute;will-change:transform,opacity;}
+  .heart{color:var(--ember);opacity:.85;filter:drop-shadow(0 0 4px rgba(226,59,78,.6));
+    animation:rise var(--hd,11s) linear infinite;}
+  .petal{width:12px;height:12px;border-radius:0 100% 0 100%;
+    background:linear-gradient(135deg,#7a1220,#c0233b);opacity:.75;
+    animation:fall var(--pd,13s) linear infinite;}
+  @keyframes rise{
+    0%{transform:translateY(0) translateX(0) scale(var(--hs,1));opacity:0;}
+    12%{opacity:.9;}
+    100%{transform:translateY(-112vh) translateX(var(--hx,20px)) scale(var(--hs,1));opacity:0;}
+  }
+  @keyframes fall{
+    0%{transform:translateY(-8vh) translateX(0) rotate(0);opacity:0;}
+    10%{opacity:.8;}
+    100%{transform:translateY(112vh) translateX(var(--px,-40px)) rotate(540deg);opacity:0;}
+  }
+
+  /* ---------- Sobre / intro ---------- */
+  .intro{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:26px;
+    background:radial-gradient(120% 80% at 50% 40%,rgba(10,18,44,.35),rgba(6,12,30,.82));
+    backdrop-filter:blur(2px);transition:opacity 1.2s ease,visibility 1.2s;cursor:pointer;text-align:center;padding:24px;}
+  .intro.gone{opacity:0;visibility:hidden;}
+  .envelope{position:relative;width:150px;height:100px;border-radius:8px;
+    background:linear-gradient(155deg,#f7e6d4,#efd2bb);
+    box-shadow:0 14px 40px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.4);
+    animation:breathe 3.4s ease-in-out infinite;}
+  .envelope::before{content:"";position:absolute;inset:0;border-radius:8px;
+    background:linear-gradient(135deg,transparent 49.4%,rgba(0,0,0,.06) 50%,transparent 50.6%),
+               linear-gradient(-135deg,transparent 49.4%,rgba(0,0,0,.06) 50%,transparent 50.6%);}
+  .flap{position:absolute;top:0;left:0;width:0;height:0;
+    border-left:75px solid transparent;border-right:75px solid transparent;
+    border-top:56px solid #e7c4a8;filter:drop-shadow(0 3px 4px rgba(0,0,0,.15));}
+  .seal{position:absolute;top:34px;left:50%;transform:translateX(-50%);z-index:2;
+    width:34px;height:34px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#ff6a7d,#c0233b);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;
+    box-shadow:0 4px 10px rgba(192,35,59,.5);}
+  @keyframes breathe{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-6px) scale(1.03);}}
+  .intro h1{font-family:'Great Vibes',cursive;font-size:clamp(2.6rem,10vw,4rem);
+    font-weight:400;color:var(--cream);text-shadow:0 2px 18px rgba(255,180,150,.5);line-height:1;}
+  .tap{font-size:1.05rem;letter-spacing:.28em;text-transform:uppercase;opacity:.75;
+    animation:pulseTap 2s ease-in-out infinite;}
+  @keyframes pulseTap{0%,100%{opacity:.4;}50%{opacity:.95;}}
+
+  /* ---------- Carta ---------- */
+  .stage{position:relative;z-index:10;height:100%;display:flex;flex-direction:column;
+    align-items:center;justify-content:flex-start;
+    padding:min(9vh,80px) 26px 24vh;overflow-y:auto;-webkit-overflow-scrolling:touch;text-align:center;}
+  .stage::-webkit-scrollbar{width:0;}
+  .letter{max-width:620px;margin:0 auto;}
+  .letter p{
+    font-size:clamp(1.35rem,5.4vw,1.85rem);
+    line-height:1.55;font-weight:400;
+    color:var(--cream);
+    text-shadow:0 2px 14px rgba(0,0,0,.45),0 0 30px rgba(255,150,130,.15);
+    margin-bottom:1.1em;}
+  .line{display:block;opacity:0;transform:translateY(14px);}
+  .revealed .line{animation:lineIn .9s ease forwards;}
+  @keyframes lineIn{to{opacity:1;transform:translateY(0);}}
+  .beat{display:inline-block;animation:beat 1.4s ease-in-out infinite;transform-origin:center;}
+  @keyframes beat{0%,100%{transform:scale(1);}15%{transform:scale(1.28);}30%{transform:scale(1);}45%{transform:scale(1.18);}}
+
+  /* Tarjeta con la firma */
+  .card{margin-top:34px;position:relative;padding:30px 42px 26px;border-radius:6px;
+    background:linear-gradient(160deg,#fdf4e6,#f3e0cd);color:#3a2a20;
+    box-shadow:0 22px 60px rgba(0,0,0,.55),0 0 46px rgba(255,190,120,.35);
+    opacity:0;transform:translateY(24px) scale(.96);}
+  .revealed .card{animation:cardIn 1.1s ease .2s forwards;}
+  @keyframes cardIn{to{opacity:1;transform:translateY(0) scale(1);}}
+  .card .name{font-family:'Great Vibes',cursive;font-size:clamp(3rem,13vw,4.4rem);
+    line-height:.9;color:#2b1c14;}
+  .card .mini{color:var(--ember);font-size:1.8rem;margin-top:6px;}
+  .card::after{content:"";position:absolute;left:50%;bottom:-42px;transform:translateX(-50%);
+    width:180px;height:60px;border-radius:50%;
+    background:radial-gradient(ellipse,rgba(255,190,110,.5),rgba(255,190,110,0) 70%);filter:blur(4px);}
+
+  /* Vela */
+  .candle{margin:56px auto 0;width:24px;height:52px;border-radius:6px;
+    background:linear-gradient(#f6e3c8,#d9b48a);position:relative;
+    box-shadow:0 0 30px rgba(255,190,110,.5);opacity:0;}
+  .revealed .candle{animation:cardIn 1s ease .5s forwards;}
+  .flame{position:absolute;top:-26px;left:50%;transform:translateX(-50%);
+    width:14px;height:26px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+    background:radial-gradient(circle at 50% 70%,#fff7d6,#ffb648 55%,#ff6a2b 100%);
+    box-shadow:0 0 24px 8px rgba(255,150,60,.6);
+    animation:flame .18s ease-in-out infinite alternate;transform-origin:bottom center;}
+  @keyframes flame{from{transform:translateX(-50%) scaleY(1) skewX(-2deg);}to{transform:translateX(-51%) scaleY(1.08) skewX(3deg);}}
+
+  .btnwrap{margin:40px auto 0;opacity:0;}
+  .revealed .btnwrap{animation:cardIn 1s ease .9s forwards;}
+  .btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);
+    color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:1.15rem;
+    letter-spacing:.14em;text-transform:uppercase;padding:12px 26px;border-radius:40px;
+    cursor:pointer;backdrop-filter:blur(6px);transition:.3s;}
+  .btn:hover,.btn:focus-visible{background:rgba(255,120,120,.3);border-color:#fff;outline:none;transform:translateY(-2px);}
+
+  @media (min-width:760px){
+    .fairy{right:8%;}
+    .stage{padding-top:8vh;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;animation-iteration-count:1!important;}
+    .line{opacity:1;transform:none;}
+    .card,.candle,.btnwrap{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+  <div class="sky"></div>
+  <div class="stars" id="stars"></div>
+
+  <!-- Constelación de Capricornio -->
+  <svg class="constellation" viewBox="0 0 300 205" xmlns="http://www.w3.org/2000/svg" aria-label="Constelación de Capricornio">
+    <polyline class="cline" points="34,37 40,64 76,140 115,163 190,140 235,122 250,64 226,78 175,82 136,86 34,37"/>
+    <!-- resplandor de estrellas brillantes -->
+    <circle class="cglow" cx="34"  cy="37"  r="7" style="--ct:4s"/>
+    <circle class="cglow" cx="40"  cy="64"  r="7" style="--ct:4.4s"/>
+    <circle class="cglow" cx="250" cy="64"  r="7.5" style="--ct:3.6s"/>
+    <circle class="cglow" cx="226" cy="78"  r="6.5" style="--ct:5s"/>
+    <!-- estrellas -->
+    <circle class="cstar bright" cx="34"  cy="37"  r="3"   style="--ct:3.2s;animation-delay:.2s"/>
+    <circle class="cstar bright" cx="40"  cy="64"  r="3.1" style="--ct:3.8s;animation-delay:.8s"/>
+    <circle class="cstar"        cx="136" cy="86"  r="2.1" style="--ct:4.2s;animation-delay:.4s"/>
+    <circle class="cstar"        cx="175" cy="82"  r="2.1" style="--ct:3.5s;animation-delay:1.1s"/>
+    <circle class="cstar bright" cx="226" cy="78"  r="2.9" style="--ct:4.6s;animation-delay:.6s"/>
+    <circle class="cstar bright" cx="250" cy="64"  r="3.2" style="--ct:3s;animation-delay:.3s"/>
+    <circle class="cstar"        cx="235" cy="122" r="2.2" style="--ct:4s;animation-delay:.9s"/>
+    <circle class="cstar"        cx="190" cy="140" r="2.4" style="--ct:3.7s;animation-delay:.5s"/>
+    <circle class="cstar"        cx="115" cy="163" r="2.2" style="--ct:4.4s;animation-delay:1.3s"/>
+    <circle class="cstar"        cx="76"  cy="140" r="2.2" style="--ct:3.4s;animation-delay:.7s"/>
+    <text class="clabel" x="150" y="196" text-anchor="middle">Capricornio</text>
+  </svg>
+
+  <div class="fairy" id="fairy"></div>
+  <div class="citylights" id="citylights"></div>
+  <div class="city"></div>
+  <div class="particles" id="particles"></div>
+  <div class="aura" id="aura"></div>
+
+  <!-- Mensaje final: dedicado a la personalidad de Capricornio -->
+  <div class="finalmsg" id="finalmsg" aria-hidden="true">
+    <p>
+      <span>Naciste bajo Capricornio:</span>
+      <span>fuerte, reservada, difícil de descifrar.</span>
+      <span>El mundo ve tu coraza;</span>
+      <span>yo tuve la suerte de ver lo que hay detrás.</span>
+      <span>Porque tras esa frialdad</span>
+      <span>se esconde el corazón más leal y comprometido que conozco.</span>
+    </p>
+  </div>
+
+  <!-- Intro: sobre -->
+  <div class="intro" id="intro" role="button" tabindex="0" aria-label="Abrir la carta para Daniela">
+    <div class="envelope"><span class="flap"></span><span class="seal">♥</span></div>
+    <h1>Para Daniela</h1>
+    <div class="tap">Toca para abrir</div>
+  </div>
+
+  <!-- Carta -->
+  <main class="stage" id="stage">
+    <div class="letter" id="letter">
+      <p>
+        <span class="line">A veces me pregunto si sabes</span>
+        <span class="line">lo mucho que significas para mí,</span>
+        <span class="line">y por si alguna vez lo olvidas,</span>
+        <span class="line">quiero que recuerdes que tu nombre</span>
+        <span class="line">habita en mis pensamientos más profundos,</span>
+        <span class="line">en mis planes más bonitos,</span>
+        <span class="line">en cada uno de mis sueños.</span>
+      </p>
+      <p>
+        <span class="line">No imagino un futuro en el que no estés,</span>
+        <span class="line">porque tú no haces parte de mi vida,</span>
+        <span class="line">eres mi vida.</span>
+        <span class="line">Eres esa parte de mí</span>
+        <span class="line">que no quiero perder jamás. <span class="beat">❤️</span></span>
+      </p>
+
+      <div class="card">
+        <div class="name">Daniela</div>
+        <div class="mini">♡</div>
+      </div>
+
+      <div class="candle"><span class="flame"></span></div>
+
+      <div class="btnwrap">
+        <button class="btn" id="finale">Da click aquí</button>
+      </div>
+    </div>
+  </main>
+
+<script>
+  const rnd=(a,b)=>Math.random()*(b-a)+a;
+
+  // Estrellas
+  const stars=document.getElementById('stars');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('span');s.className='star';
+    s.style.left=rnd(0,100)+'%';s.style.top=rnd(0,55)+'%';
+    s.style.setProperty('--tw',rnd(2,5)+'s');
+    s.style.animationDelay=rnd(0,4)+'s';
+    s.style.transform='scale('+rnd(.6,1.6)+')';
+    stars.appendChild(s);
+  }
+
+  // Luces de ciudad
+  const cl=document.getElementById('citylights');
+  for(let i=0;i<120;i++){
+    const w=document.createElement('span');w.className='win';
+    w.style.left=rnd(0,100)+'%';w.style.bottom=rnd(0,90)+'%';
+    w.style.setProperty('--wf',rnd(3,7)+'s');
+    w.style.animationDelay=rnd(0,5)+'s';
+    cl.appendChild(w);
+  }
+
+  // Luces de hada (guirnalda que baja por la derecha)
+  const fairy=document.getElementById('fairy');
+  for(let i=0;i<26;i++){
+    const b=document.createElement('span');b.className='bulb';
+    const t=i/25;
+    b.style.top=(t*100)+'vh';
+    b.style.right=(Math.sin(t*7)*22+6)+'px';
+    b.style.setProperty('--bf',rnd(1.6,3.2)+'s');
+    b.style.animationDelay=rnd(0,3)+'s';
+    fairy.appendChild(b);
+  }
+
+  // Partículas
+  const P=document.getElementById('particles');
+  const HEART='<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M12 21s-7.5-4.9-10-9.2C.3 8.6 1.7 5 5.2 5c2 0 3.3 1.2 4 2.3C9.9 6.2 11.2 5 13.2 5c3.5 0 4.9 3.6 3.2 6.8C18.5 16.1 12 21 12 21z"/></svg>';
+  function spawnHeart(x){
+    const h=document.createElement('div');h.className='heart';
+    const size=rnd(14,30);
+    h.style.width=size+'px';h.style.height=size+'px';
+    h.style.left=(x!==undefined?x:rnd(0,100))+'%';h.style.bottom='-6vh';
+    h.style.setProperty('--hd',rnd(8,15)+'s');
+    h.style.setProperty('--hx',rnd(-60,60)+'px');
+    h.style.setProperty('--hs',rnd(.7,1.2));
+    h.innerHTML=HEART;P.appendChild(h);
+    setTimeout(()=>h.remove(),16000);
+  }
+  function spawnPetal(){
+    const p=document.createElement('div');p.className='petal';
+    const s=rnd(8,16);p.style.width=s+'px';p.style.height=s+'px';
+    p.style.left=rnd(0,100)+'%';p.style.top='-6vh';
+    p.style.setProperty('--pd',rnd(9,16)+'s');
+    p.style.setProperty('--px',rnd(-90,10)+'px');
+    P.appendChild(p);setTimeout(()=>p.remove(),17000);
+  }
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // Apertura
+  const intro=document.getElementById('intro');
+  const letter=document.getElementById('letter');
+  let opened=false;
+  function open(){
+    if(opened)return;opened=true;
+    intro.classList.add('gone');
+    letter.classList.add('revealed');
+    const lines=letter.querySelectorAll('.line');
+    lines.forEach((l,i)=>l.style.animationDelay=(0.35+i*0.55)+'s');
+    if(!reduce){
+      for(let i=0;i<8;i++)setTimeout(()=>spawnHeart(),i*300);
+      setInterval(spawnHeart,1400);
+      setInterval(spawnPetal,1700);
+    }
+  }
+  intro.addEventListener('click',open);
+  intro.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+
+  // Chispas que suben en el final
+  function spawnSpark(){
+    const s=document.createElement('div');s.className='spark';
+    s.style.left=rnd(0,100)+'vw';s.style.bottom=rnd(-2,4)+'vh';
+    s.style.setProperty('--sd',rnd(3.5,6)+'s');
+    document.body.appendChild(s);setTimeout(()=>s.remove(),6500);
+  }
+
+  // Botón final: el mensaje desaparece y el cielo sube e ilumina
+  document.getElementById('finale').addEventListener('click',()=>{
+    letter.classList.add('dismiss');
+    document.getElementById('aura').classList.add('on');
+    setTimeout(()=>{
+      stars.classList.add('lift');
+      document.querySelectorAll('.star').forEach((s,i)=>{
+        s.style.animationDelay=(i%20)*45+'ms';
+        s.classList.add('shine');
+      });
+      const con=document.querySelector('.constellation');
+      if(con)con.classList.add('lift');
+      document.getElementById('finalmsg').classList.add('on');
+      if(!reduce){for(let i=0;i<44;i++)setTimeout(spawnSpark,i*55);}
+    },500);
+  });
+</script>
+</body>
+</html>
